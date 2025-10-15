@@ -72,6 +72,7 @@ fn test5() {
     }
 }
 
+
 #[derive(Debug)]
 enum SpreadsheetCell {
     Int(i32),
