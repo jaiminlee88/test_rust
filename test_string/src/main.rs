@@ -97,8 +97,38 @@ fn test3() {
     }
 }
 
+fn test4() {
+    /*
+    将字符串转换为 Pig Latin， 也就是每一个单词的第一个辅音字母被移动到单词的结尾并
+    增加 “ay”， 所以 “first” 会变成 “irst-fay”。 元音字母开头的单词则在结尾增加
+    “hay”（ “apple” 会变成 “apple-hay”） 。 牢记 UTF-8 编码！
+    */
+    println!("===test4==================");
+    let mut s = String::from("hello world  this is a test");
+    let vowels = vec!['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'];
+    let mut result = String::new();
+    for mut word in s.split_whitespace() {
+        let mut first_char = word.chars().next().unwrap();
+        if vowels.contains(&first_char) {
+            // let mut new_word = word.to_string();
+            // new_word.push_str("-hay");
+            // result.push_str(&new_word);
+            result.push_str(&word);
+            result.push_str("-hay ");
+        } else {
+            let mut new_word = word[1..].to_string();
+            let s = format!("{}-{}ay", new_word, first_char); // 使用 format! 宏连接字符串
+            result.push_str(&s);
+            result.push_str(" ");
+        }
+    }
+    println!("{}", s);
+    println!("{}", result);
+}
+
 fn main() {
     test1(); // 拼接
     test2(); // 索引
     test3(); // 遍历
+    test4(); // 字符串练习
 }
