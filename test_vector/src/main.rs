@@ -103,6 +103,60 @@ fn test6() {
     println!("");
 }
 
+struct Statics {
+    mean: f64,
+    median: i32,
+    mode: i32,
+}
+
+impl Statics {
+    fn new() -> Self {
+        Self {
+            mean: 0.0,
+            median: 0,
+            mode: 0,
+        }
+    }
+
+    fn gen_all(&mut self, vec: &Vec<i32>) {
+        let mut mean = 0.0;
+        let mut median = 0;
+        let mut mode = 0;
+
+        let mut map = HashMap::new();
+        for &v in vec {
+            mean += v as f64;
+            *map.entry(v).or_insert(0) += 1;
+        }
+        println!("mean: {}", mean);
+        self.mean = mean / vec.len() as f64;
+
+        let mut vec_sorted = vec.clone();
+        vec_sorted.sort();
+        self.median = vec_sorted[vec_sorted.len() / 2];
+
+        let mut max_count = 0;
+        for (k, v) in &map {
+            if v > &max_count {
+                max_count = *v;
+                self.mode = *k;
+            }
+        }
+    }
+}
+
+fn test7() {
+    println!("===test7==================");
+    {
+        let mut v = vec![1, 2, 3, 4, 4, 5, 5, 5, 6, 7, 8, 9, 10];
+        let mut s = Statics::new();
+        s.gen_all(&v);
+        println!("s.mean: {}", s.mean);
+        println!("s.median: {}", s.median);
+        println!("s.mode: {}", s.mode);
+    }
+}
+
 fn main() {
     test1();
     test2();
@@ -110,4 +164,5 @@ fn main() {
     test4();
     test5();
     test6();
+    test7(); // 数据统计练习
 }
