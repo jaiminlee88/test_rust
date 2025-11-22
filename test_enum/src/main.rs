@@ -131,7 +131,7 @@ fn test7() {
     }
 }
 fn main() {
-    test1(); // enum
+    test1(); // enum 带标签的联合体（tagged union）
     test2(); // enum message
     test3(); // enum option
     test4(); // enum match
