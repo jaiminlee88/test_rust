@@ -1,5 +1,6 @@
 
-pub trait Summary { // 要求必须实现
+pub trait Summary { // 类似定义了接口，要求必须实现
+    // trait 默认是“静态多态”，，没有虚表成本
     // fn summarize(&self) -> String; // 只是一个签名，不是具体实现
     fn summarize(&self) -> String {
         format!("(Read more from {}...)", self.summarize_author()) // 默认实现
@@ -7,7 +8,7 @@ pub trait Summary { // 要求必须实现
 
     fn summarize_author(&self) -> String;
 }
-pub trait Display {
+pub trait Display { // 类似定义了接口，要求必须实现
     fn display(&self) -> String;
 }
 
@@ -18,7 +19,8 @@ pub struct NewsArticle {
     pub content: String,
 }
 
-impl Summary for NewsArticle {
+impl Summary for NewsArticle { // 为NewsArticle类型实现了Summary接口
+    // 实现了Summary接口，就必须实现summarize和summarize_author方法
     fn summarize(&self) -> String {
         format!("{}, by {} ({})", self.headline, self.author, self.location)
     }
@@ -71,6 +73,14 @@ impl Summary for Tweet1 {
 }
 
 fn test1() {
+    /*
+    Trait = 一组方法签名（+可选默认实现），用于描述行为（接口）。
+    可以实现 静态多态和动态多态，涵盖了虚函数全部功能
+    任何类型只要实现了这些方法，就“具有这个行为”。
+    换句话说：
+        在 Rust 中，trait 就是“接口（interface）”
+        是行为的抽象，而不是数据的抽象
+    */
     println!("===test1==================");
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
