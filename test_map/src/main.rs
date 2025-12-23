@@ -14,6 +14,9 @@ fn test1() {
     }
 
     {
+        // vec! 是一个宏，用来创建 Vec<T>
+        let teams_0 = Vec::from([1, 2, 3]);
+        let teams_1 = Vec::<i32>::from([1, 2, 3]); // 关联函数写法,from 是一个关联函数，不属于实例，不能写成 Vec<i32>::from
         let teams = vec![String::from("Blue"), String::from("Yellow")];
         let initial_scores = vec![10, 50];
 

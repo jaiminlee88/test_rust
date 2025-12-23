@@ -75,17 +75,19 @@ fn test5() {
     //     sign_in_count: u64,
     //     active: bool,
     // }
-    struct UserRef<'a> {
-        username: &'a String,
-        email: &'a String,
+
+    // 'a 只是一种标记，名字随便取，比如'life，生命周期标签没有语义，只是标识符。
+    struct UserRef<'a> { // 生命周期泛型，可以理解为'a 表示某局部变量的生命周期
+        username: &'a String, // & = 引用，'a = 生命周期标签，这个引用至少活得和生命周期 'a 一样长。
+        email: &'a String, // 'a告诉编译器，这个引用生命周期不会比username1长
         sign_in_count: u64,
         active: bool,
     }
     let username1 = String::from("user5");
     let email1 = String::from("user5@example.com");
     let user5 = UserRef {
-        username: &username1, // 生命周期离开后就失效，
-        email: &email1,
+        username: &username1, // 生命周期离开后就失效，这个引用生命周期不会比username1长
+        email: &email1, // 生命周期离开后就失效，这个引用生命周期不会比email1长
         sign_in_count: 1,
         active: true,
     };

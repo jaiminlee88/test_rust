@@ -11,7 +11,8 @@ fn test2() {
     let s = String::from("hello"); // s的scope在test2函数结束时结束
     println!("{}", s);
 
-    let mut s = String::from("hello");
+    let mut s = String::from("hello"); // 可变变量
+    
     s.push_str(", world!");
     println!("{}", s);
 

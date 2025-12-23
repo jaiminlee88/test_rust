@@ -104,7 +104,7 @@ fn plus_one(x: std::option::Option<i32>) -> std::option::Option<i32> {
 
 fn test5() {
     println!("test5 start==================");
-    let five = Some(5);
+    let five = Some(5); // preclude带来的便利，已经有了use std::option::Option::{Some, None};
     let six = plus_one(five);
     let none = plus_one(None);
     println!("six={:?}", six);
