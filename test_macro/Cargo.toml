@@ -1,0 +1,7 @@
+[package]
+name = "test_macro"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hello_derive = { path = "./hello_derive" } # 派生宏引入到当前工程，编译器依赖

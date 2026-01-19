@@ -1,0 +1,6 @@
+[package]
+name = "hello_derive"
+
+[lib]
+proc-macro = true # 告诉编译器，这个 crate 不是普通库，而是“编译器插件”
+
